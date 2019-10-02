@@ -1,1 +1,56 @@
+Each candidate solution is called a chromosome .
+A chromosome constitues a 105 bit vector(called gene from hereon) , a fitness value and a validation bit .
+The gene has 5 bits allocated for each value . The order of allocation is x1,y1,z1........x7,y7,z7 (5x3x7=105)  
+Validation bit is 1 if the gene represents a valid geometry.
+A population consists of 100 chromosomes . (Recommended pop. size = 4n, Goldberg . For our case , 4 x 3 x 7 = 84 ~ 100)
 
+
+
+
+ RULE #1 : No function may be able to edit population data directly . 
+
+Pop_Data;
+Return_Value = Func(Pop_Data);
+Pop_Data= Return_Value 
+
+and NOT 
+Func(Pop_Data)
+
+RULE #2 : For variable and function names , first letter is capital , all others are small . 
+If a '.' or '_' appears the next letter is capital as in Rule 1 example .
+
+
+
+Most of the below definitions match Udemy course 
+
+Initialisation 
+I/p = No of chromosomes , no of bits in chromosome 
+O/p = Population Object (Gene=Random, Fitness=0,validation bit=0)
+
+Selection 
+I/p = Population
+O/p = Selected Chromosomes 
+
+Crossover 
+I/p = 2 chromosomes , Pc,mode
+o/p= 2 chromosomes
+
+Mutation 
+I/p = chromosome , Pm
+O/p = 1 chromosome 
+
+Elitism 
+I/p = Newpopulation,Population,Er
+O/p = Combined Population object
+
+Geometry validation
+I/p = 1 Chromosome
+O/p = Boolean 
+
+Fitness Function 
+I/p = 1 chromosome
+O/p = Double
+
+Nec Interface 
+I/p = 1 chromosome 
+O/p=  Struct of cells
