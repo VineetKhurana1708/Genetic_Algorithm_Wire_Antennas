@@ -5,7 +5,8 @@ function d3intersect(A,B,C,D,j)
 BA= B-A;    %distance between each x, y & z of A and B
 %C=[1, 4, -2];D=[3,8,6];
 DC=D-C;
-syms t s;
+syms t ;
+syms s;
 equ1=A+t*BA;
 equ2=C+s*DC;
 eqns = [equ1(1,1) == equ2(1,1), equ1(1,2) == equ2(1,2)];
