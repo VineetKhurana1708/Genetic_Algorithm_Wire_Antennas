@@ -1,17 +1,26 @@
 % Genetic Algoritm V 1.0
 
-clear
-clc
+
+
+% UNCOMMENT CLC and CLEAR 
+
+% AXial ratio may be independent of frequency (scale up or down )  , but
+% our system maps from 0.1 lambda to 0.5 lambda , so scaling has to be done
+% manually . frequency cannot be changed retaining results 
+
+
+%clear
+%clc
 
 %% controling paramters of the GA algortihm
 
 M = 20; % number of chromosomes (cadinate solutions)% Better if even
 N = 105;  % number of genes (variables)
-MaxGen = 5;
+MaxGen = 10;
 Pc = 0.85;
 Pm = 0.01;
 Er = 0.05;
-Frequency=30; %in Mhz
+Frequency=9000; %in Mhz
 
 
 %%  Initialization% Add Support for validation bit 
@@ -52,7 +61,7 @@ for g = 2 : MaxGen
         newPopulation.Chromosomes(i).fitness = Fitness_Func( newPopulation.Chromosomes(i),Frequency );
     end
     % Elitism
-    [ newPopulation ] = elitism(newPopulation, Er);
+    [ newPopulation ] = elitism(population, newPopulation, Er);
     
     population = newPopulation;
     
