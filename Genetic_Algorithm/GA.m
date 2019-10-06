@@ -20,7 +20,7 @@ MaxGen = 10;
 Pc = 0.85;
 Pm = 0.01;
 Er = 0.05;
-Frequency=9000; %in Mhz
+Frequency=1547; %in Mhz
 
 
 %%  Initialization% Add Support for validation bit 
