@@ -1,7 +1,7 @@
 %Data will be stored in cell array Imported Data  after running this  
 function Imported_Data= NEC(MAT,freq)%in Mhz
 
-clc 
+
 % Assumption: When all 5 bits are 1 , it corresponds to 0.5lambda , Source : Linden
 % This assumption is used in Normalisation and AutoSegment
 
@@ -21,14 +21,20 @@ lambda = 300/freq;%in metres
 ln=length(MAT);
 
 input_vec(ln,7)=0;
+input_vec(:,:)=0;
 input_vec(2:ln,2:4)=MAT(1:(ln-1),1:3);
 input_vec(:,5:7)=MAT(:,1:3);
 
  input_vec=Autosegment(input_vec);
 
-input_vec(:,2:7)= input_vec(:,2:7)*(lambda/62);%Normalisation
-
-
+ 
+ 
+%Mapping 
+ a=0.016*lambda;
+ b=lambda/2;
+ input_vec(2:ln,2:7) = (input_vec(2:ln,2:7))*(b-a)/(31) + a;
+  input_vec(1,5:7) = (input_vec(1,5:7))*(b-a)/(31) + a;
+ 
 
 filename = 'buffer';
 %input_vec= [0 0 0 -0.1 0 20 ;-0.1 0 20 1 0 20;1 0 20 16 0 50]; % Format is [x1,y1,z1,x2,y2,z2]in one row . Resembles inp file format
@@ -36,7 +42,7 @@ filename = 'buffer';
 fid= fopen(strcat(filename,'.inp'),'w'); 
 
 
-formatSpec = "CM Ex card is correct, errors can be bugs \r\nCE \r\nGW 1 %d %d %d %d %d %d %d  1.02e-3\r\n" + "GW 2 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GW 3 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GW 4 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GW 5 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GW 6 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GW 7 %d %d %d %d %d %d %d  1.02e-3\r\n"+"GE 1\r\nGN 1 0\r\nEX 0 1 1 0 1 0\r\nFR 0 1 0 0 %d 0\r\nRP 0 19 73 1003 -90 0 5 5 ";
+formatSpec = "CM Ex card is correct, errors can be bugs \r\nCE \r\nGW 1 %d %d %d %d %d %d %d  0.01e-3\r\n" + "GW 2 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GW 3 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GW 4 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GW 5 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GW 6 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GW 7 %d %d %d %d %d %d %d  0.01e-3\r\n"+"GE 1\r\nGN 1 0\r\nEX 0 1 1 0 1 0\r\nFR 0 1 0 0 %d 0\r\nRP 0 19 73 1003 -90 0 5 5 ";
 
 
 input_vec_trans=input_vec';
